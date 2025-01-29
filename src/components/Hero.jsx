@@ -33,8 +33,8 @@ const Hero = () => {
             <ButtonPrimary
               label="Download CV"
               icon="download"
-              href="assets\Navneet Gupta_VITB.pdf"
-              download="Navneet_Gupta_VITB.pdf"
+              href="assets\Navneet_CV.pdf"
+              download="Navneet_CV.pdf"
             />
 
             <ButtonOutline

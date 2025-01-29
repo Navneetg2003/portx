@@ -14,7 +14,7 @@ const Header = () => {
           href="/" 
           className="logo"
           >
-            <img src="public/assets/logo.png"
+            <img src="assets/logo.png"
             width={40}
             height={40}
             alt="Navneet Gupta" 

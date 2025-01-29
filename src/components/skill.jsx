@@ -3,42 +3,42 @@ import SkillCard from "./SkillCard";
 
 const skillItem = [
     {
-      imgSrc: 'public/assets/spring-boot.svg',
+      imgSrc: 'assets/spring-boot.svg',
       label: 'SpringBoot',
       desc: 'Framework'
     },
     {
-      imgSrc: 'public/assets/css3.svg',
+      imgSrc: 'assets/css3.svg',
       label: 'CSS',
       desc: 'User Interface'
     },
     {
-      imgSrc: 'public/assets/javascript.svg',
+      imgSrc: 'assets/javascript.svg',
       label: 'JavaScript',
       desc: 'Interaction'
     },
     {
-      imgSrc: 'public/assets/nodejs.svg',
+      imgSrc: 'assets/nodejs.svg',
       label: 'NodeJS',
       desc: 'Web Server'
     },
     {
-      imgSrc: 'public/assets/expressjs.svg',
+      imgSrc: 'assets/expressjs.svg',
       label: 'ExpressJS',
       desc: 'Node Framework'
     },
     {
-      imgSrc: 'public/assets/mongodb.svg',
+      imgSrc: 'assets/mongodb.svg',
       label: 'MongoDB',
       desc: 'Database'
     },
     {
-      imgSrc: 'public/assets/react.svg',
+      imgSrc: 'assets/react.svg',
       label: 'React',
       desc: 'Framework'
     },
     {
-      imgSrc: 'public/assets/tailwindcss.svg',
+      imgSrc: 'assets/tailwindcss.svg',
       label: 'TailwindCSS',
       desc: 'User Interface'
     },

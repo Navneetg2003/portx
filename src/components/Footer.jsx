@@ -14,8 +14,8 @@ const sitemap = [
     href: "#work",
   },
   {
-    label: "Reviews",
-    href: "#reviews",
+    label: "Experience",
+    href: "#experiences",
   },
   {
     label: "Contact me",
@@ -38,7 +38,7 @@ const socials = [
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/codewithsadee",
+    href: "https://www.instagram.com/_navneet__gupta",
   },
   {
     label: "Leetcode",

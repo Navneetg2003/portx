@@ -54,7 +54,7 @@ const socialLinks = [
     alt: "Twitter X",
   },
   {
-    href: "https://www.instagram.com/codewithsadee",
+    href: "https://www.instagram.com/_navneet__gupta",
     icon: (
       <svg
         width="25"

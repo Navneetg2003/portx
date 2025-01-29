@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Navneet Gupta</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/logo.png" type="image/png">
+</head>
+<body>
+    <header id="home">
+        <nav class="navbar">
+            <button class="menu-toggle" aria-label="Open menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#projects">Portfolio</a></li>
+                <li><a href="#experiences">Experience</a></li>
+            </ul>
+        </nav>
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="Videos/3130182-uhd_3840_2160_30fps.mp4" type="video/mp4">
+                Seu navegador não suporta o elemento de vídeo.
+            </video>
+        </div>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Hello, I'm Navneet!</h1>
+                <p>A passionate AI & Web Developer, aspiring to build intelligent solutions.</p>
+            </div>
+        </section>
+    </header>
+
+    <section id="about" class="about">
+        <div class="container about-container">
+            <div class="about-text">
+                <h2>About Me</h2>
+                <p>
+                    I am an B.Tech student in Computer Science Engineering at VIT, with a CGPA of 8.40. I am a Web Development Intern at GCCloud Info System Pvt Ltd. Passionate about backend development, and AI.
+                </p>
+                <a href="Docs\Navneet Gupta_VITB.pdf" download="Navneet Gupta_VITB.pdf" class="download-cv-btn">Download CV</a>
+            </div>
+            <div class="about-image">
+                <img src="images/101.png" alt="Navneet Gupta" />
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2>My Skills</h2>
+            <ul class="skills-list">
+                <li class="skill-item">
+                    <span class="skill-name">Java, Spring Boot</span>
+                    <span class="skill-level">Intermediate</span>
+                </li>
+                <li class="skill-item">
+                    <span class="skill-name">Python, Machine Learning</span>
+                    <span class="skill-level">Intermediate</span>
+                </li>
+                <li class="skill-item">
+                    <span class="skill-name">MERN Stack (MongoDB, Express, React, Node)</span>
+                    <span class="skill-level">Beginner</span>
+                </li>
+                <li class="skill-item">
+                    <span class="skill-name">SQL, MongoDB, PostgreSQL</span>
+                    <span class="skill-level">Intermediate</span>
+                </li>
+                <li class="skill-item">
+                    <span class="skill-name">JavaScript, ReactJS</span>
+                    <span class="skill-level">Intermediate</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+    
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>My Projects</h2>
+            <div class="carousel">
+                <div class="carousel-item">
+                    <img src="images\1.jpeg" alt="Projeto 1">
+                    <h3>Chat Application</h3>
+                    <p>The real-time chat application, built with Spring Boot (backend) and React (frontend), enables instant messaging without page refresh. React manages the UI and communicates with the backend using WebSockets for real-time message exchange. The backend handles user authentication, stores chat history, and broadcasts messages through WebSocket endpoints. A database supports user data and message storage, ensuring scalability and reliability for future enhancements.</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="images\2.jpeg" alt="Project 2">
+                    <h3>GeoVision</h3>
+                    <p>GeoVision uses spatial data to visualize and analyze geographic information through interactive maps. It helps users interpret location-based patterns for data-driven decisions, supporting applications in urban planning, environmental monitoring, and more. GIS technology offers dynamic visuals and powerful analysis tools, providing valuable insights into geographic trends for both professionals and casual users.</p>
+                </div>            
+        </div>
+    </section>
+
+    <section id="experiences" class="experiences">
+        <div class="container">
+            <h2>Experiences</h2>
+            <div class="experiences-carousel">
+                <div class="experience-card">
+                    <img src="https://media.licdn.com/dms/image/v2/C4D0BAQELqHrDyzleng/company-logo_200_200/company-logo_200_200/0/1669543718928?e=1746057600&v=beta&t=mZem_W1jdrFckOtD8GyernyujsgTUJtssq0ZnavOQdk" alt="Full Stack Web Developer Intern - Gccloud Info System Pvt. Ltd.">
+                    <h3>Full Stack Web Developer Intern - Gccloud Info System Pvt. Ltd.</h3>
+                    <p class="period">December 2024 - January 2025</p>
+                    <p>Worked on applications using Spring Boot and integrated CI/CD pipelines. Designed UI/UX with HTML, CSS, JavaScript, and libraries. Developed personal projects from start to finish, focusing on deployment and gaining practical experience in full-stack web development.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <footer>
+        <div class="container">
+            <h2>Contact Me</h2>
+            <div class="contact-links">
+                <a href="https://github.com/Navneetg2003" target="_blank">
+                    <img src="images/github.png" alt="GitHub">
+                </a>
+                <a href="https://www.linkedin.com/in/navneetgupta/" target="_blank">
+                    <img src="images/linkedin.png" alt="LinkedIn">
+                </a>
+            </div>
+        </div>
+        <p>&copy; 2024 NavPortfolio. All rights reserved to Navneet Gupta.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

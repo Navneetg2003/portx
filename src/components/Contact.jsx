@@ -80,14 +80,14 @@ const Contact = () => {
         <div className="mb-12 lg:mb-0 lg:flex lg:flex-col fade-in">
           <div className="relative inline-block mb-8">
             <h2 className="headline-2 lg:max-w-[12ch] reveal-up relative z-10">
-              Let's Work Together
+              Let&apos;s Work Together
             </h2>
             <div className="absolute -bottom-2 left-0 w-32 h-1 bg-gradient-to-r from-sky-400 via-blue-500 to-purple-500 rounded-full animate-glow"></div>
             <div className="absolute -top-8 -left-8 w-24 h-24 bg-sky-400/10 rounded-full blur-2xl"></div>
           </div>
 
           <p className="text-zinc-300 mb-6 max-w-[50ch] lg:max-w-[30ch] leading-relaxed text-lg">
-            Have a project in mind or want to collaborate? Let's connect and create something amazing together!
+            Have a project in mind or want to collaborate? Let&apos;s connect and create something amazing together!
           </p>
 
           <div className="space-y-4 mb-8">
@@ -108,7 +108,7 @@ const Contact = () => {
           <div className="mt-auto">
             <p className="text-zinc-500 text-sm mb-4 uppercase tracking-wider font-semibold">Connect With Me</p>
             <div className="flex items-center gap-3">
-              {socialLinks.map(({ href, icon, alt }, key) => (
+              {socialLinks.map(({ href, icon, alt }) => (
                 <a
                   key={alt}
                   href={href}

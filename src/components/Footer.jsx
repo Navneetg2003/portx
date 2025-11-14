@@ -56,14 +56,10 @@ const Footer = () => {
           <div className="mb-10 fade-in">
             <div className="relative inline-block mb-8">
               <h2 className="headline-1 lg:max-w-[12ch] relative z-10">
-                Let&apos;s work together today!
+                Thank you for visiting
               </h2>
               <div className="absolute -bottom-2 left-0 w-32 h-1 bg-gradient-to-r from-sky-400 via-blue-500 to-purple-500 rounded-full animate-glow"></div>
             </div>
-
-            <p className="text-zinc-400 max-w-[40ch] leading-relaxed">
-              Ready to bring your ideas to life? Get in touch and let's create something extraordinary.
-            </p>
           </div>
 
           <div className="grid grid-cols-2 gap-8 lg:pl-20 fade-in delay-200">

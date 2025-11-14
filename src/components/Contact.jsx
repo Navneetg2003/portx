@@ -76,87 +76,127 @@ const socialLinks = [
 const Contact = () => {
   return (
     <section id="contact" className="section">
-      <div className="container lg:grid lg:grid-cols-2 lg:items-stretch">
-        <div className="mb-12 lg:mb-0 lg:flex lg:flex-col">
-          <h2 className="headline-2 lg:max-w-[12ch]">Contact Me</h2>
+      <div className="container lg:grid lg:grid-cols-2 lg:items-stretch lg:gap-12">
+        <div className="mb-12 lg:mb-0 lg:flex lg:flex-col fade-in">
+          <div className="relative inline-block mb-8">
+            <h2 className="headline-2 lg:max-w-[12ch] reveal-up relative z-10">
+              Let's Work Together
+            </h2>
+            <div className="absolute -bottom-2 left-0 w-32 h-1 bg-gradient-to-r from-sky-400 via-blue-500 to-purple-500 rounded-full animate-glow"></div>
+            <div className="absolute -top-8 -left-8 w-24 h-24 bg-sky-400/10 rounded-full blur-2xl"></div>
+          </div>
 
-          <p className="text-zinc-400 mt-3 mb-8 max-w-[50ch] lg:max-w-[30ch]">
-            Reach out today to discuss your project needs and start
-            collaborating on something amazing!
+          <p className="text-zinc-300 mb-6 max-w-[50ch] lg:max-w-[30ch] leading-relaxed text-lg">
+            Have a project in mind or want to collaborate? Let's connect and create something amazing together!
           </p>
 
-          <div className="flex items-center gap-2 mt-auto">
-            {socialLinks.map(({ href, icon, alt }, key) => (
-              <a
-                key={alt}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-pink-400"
-                aria-label={`Visit my ${alt} profile`}
-              >
-                {icon}
-              </a>
-            ))}
+          <div className="space-y-4 mb-8">
+            <a 
+              href="mailto:navneetgupta1302@gmail.com" 
+              className="flex items-center gap-3 text-zinc-400 hover:text-sky-400 transition-colors duration-300 group"
+            >
+              <span className="material-symbols-rounded text-2xl group-hover:scale-110 transition-transform duration-300">mail</span>
+              <span className="text-sm group-hover:translate-x-1 transition-transform duration-300">navneetgupta1302@gmail.com</span>
+            </a>
+            
+            <div className="flex items-center gap-3 text-zinc-400">
+              <span className="material-symbols-rounded text-2xl">location_on</span>
+              <span className="text-sm">Madhya Pradesh, India</span>
+            </div>
+          </div>
+
+          <div className="mt-auto">
+            <p className="text-zinc-500 text-sm mb-4 uppercase tracking-wider font-semibold">Connect With Me</p>
+            <div className="flex items-center gap-3">
+              {socialLinks.map(({ href, icon, alt }, key) => (
+                <a
+                  key={alt}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 grid place-items-center rounded-lg bg-zinc-800/50 border border-zinc-700/50 hover:border-sky-400/50 text-zinc-400 hover:text-sky-400 transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:bg-zinc-700/50 hover:shadow-lg hover:shadow-sky-400/20"
+                  aria-label={`Visit my ${alt} profile`}
+                >
+                  {icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
         <form
           action="https://getform.io/f/anllxzna"
           method="POST"
-          className="xl:pl-10 2xl:pl-20"
+          className="xl:pl-10 2xl:pl-20 fade-in delay-200"
         >
-          <div className="md:grid md:items-center md:grid-cols-2 md:gap-2">
-            <div className="mb-4">
-              <label htmlFor="name" className="label">
-                Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                autoComplete="name"
-                required
-                placeholder="Navneet Gupta"
-                className="text-field"
-              />
-            </div>
+          <div className="relative p-[2px] rounded-2xl bg-gradient-to-br from-sky-400/30 via-blue-500/20 to-purple-500/30 hover:from-sky-400/50 hover:via-blue-500/40 hover:to-purple-500/50 transition-all duration-500">
+            <div className="relative rounded-2xl bg-gradient-to-br from-zinc-900 to-zinc-800 p-6 md:p-8">
+              
+              {/* Animated gradient overlay */}
+              <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-sky-400/5 via-transparent to-blue-500/5"></div>
+              </div>
 
-            <div className="mb-4">
-              <label htmlFor="email" className="label">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                autoComplete="email"
-                required
-                placeholder="navneet@example.com"
-                className="text-field"
-              />
+              <div className="relative z-10">
+                <h3 className="text-xl font-bold mb-6 text-transparent bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text">
+                  Send me a message
+                </h3>
+
+                <div className="md:grid md:items-center md:grid-cols-2 md:gap-4">
+                  <div className="mb-5">
+                    <label htmlFor="name" className="label text-zinc-300 mb-2 block text-sm font-medium">
+                      Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      autoComplete="name"
+                      required
+                      placeholder="Name"
+                      className="text-field w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-zinc-200 placeholder-zinc-500 focus:border-sky-400/50 focus:ring-2 focus:ring-sky-400/20 focus:outline-none transition-all duration-300"
+                    />
+                  </div>
+
+                  <div className="mb-5">
+                    <label htmlFor="email" className="label text-zinc-300 mb-2 block text-sm font-medium">
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      autoComplete="email"
+                      required
+                      placeholder="email@example.com"
+                      className="text-field w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-zinc-200 placeholder-zinc-500 focus:border-sky-400/50 focus:ring-2 focus:ring-sky-400/20 focus:outline-none transition-all duration-300"
+                    />
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <label htmlFor="message" className="label text-zinc-300 mb-2 block text-sm font-medium">
+                    Message *
+                  </label>
+                  <textarea
+                    name="message"
+                    id="message"
+                    placeholder="Tell me about your project..."
+                    required
+                    className="text-field resize-y min-h-32 max-h-80 w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-zinc-200 placeholder-zinc-500 focus:border-sky-400/50 focus:ring-2 focus:ring-sky-400/20 focus:outline-none transition-all duration-300"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full px-6 py-3.5 rounded-lg bg-gradient-to-r from-sky-400 to-blue-500 text-zinc-950 font-semibold hover:from-sky-500 hover:to-blue-600 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-sky-400/30 flex items-center justify-center gap-2 group"
+                >
+                  <span>Send Message</span>
+                  <span className="material-symbols-rounded text-xl group-hover:translate-x-1 transition-transform duration-300">send</span>
+                </button>
+              </div>
             </div>
           </div>
-
-          <div className="mb-4">
-            <label htmlFor="message" className="label">
-              Message
-            </label>
-            <textarea
-              name="message"
-              id="message"
-              placeholder="Hi!!"
-              required
-              className="text-field resize-y min-h-32 max-h-80"
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className="btn btn-primary [&]:max-w-full w-full justify-center "
-          >
-            Submit
-          </button>
         </form>
       </div>
     </section>

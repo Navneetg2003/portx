@@ -6,28 +6,38 @@
 
 Personal Introduction: About me, skills, and experience.
 
-Projects Showcase: Details of my key projects with links to repositories.
+Projects Showcase: 8+ featured projects with links to repositories.
+
+Skills Display: 16+ technologies and tools I work with.
 
 Resume Download: Easy access to my resume.
 
 Contact Form: Get in touch via email.
 
-Dark Mode Support: User-friendly design with dark mode toggle.
+Professional Experience: Detailed work history and internships.
+
+Responsive Design: Mobile-first design with smooth animations.
 
 🛠️ Tech Stack
 
-Frontend: React.js, Next.js, Tailwind CSS
+Frontend: React.js, Vite
+
+Styling: Tailwind CSS (with custom scrollbar)
+
+Icons: Material Symbols (Google Fonts)
+
+Analytics: Vercel Analytics
+
+Form Handling: Getform.io
 
 Deployment: Vercel
-
-Other Tools: Framer Motion (animations), EmailJS (contact form handling)
 
 📦 Installation & Setup
 
 Clone the Repository:
 
-git clone https://github.com/your-username/portfolio.git
-cd portfolio
+git clone https://github.com/Navneetg2003/portx.git
+cd portx
 
 Install Dependencies:
 
@@ -37,12 +47,12 @@ Run the Development Server:
 
 npm run dev
 
-Open http://localhost:3000 to view it in the browser.
+Open http://localhost:5173 to view it in the browser.
 
 Build for Production:
 
 npm run build
-npm run start
+npm run preview
 
 📁 Project Structure
 

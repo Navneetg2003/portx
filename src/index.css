@@ -8,7 +8,13 @@
   }
 
   body{
-    @apply bg-zinc-900 text-zinc-50 
+    @apply text-zinc-50;
+    background: #05050f;
+    line-height: 1.6;
+  }
+
+  *{
+    @apply transition-colors duration-200;
   }
 }
 
@@ -21,6 +27,7 @@
     @apply max-w-max;
     background: -webkit-linear-gradient(0deg, #fafafa, #a1a1aa);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   
@@ -44,24 +51,168 @@
 
   .img-box{
     @apply bg-zinc-700 overflow-hidden;
+    position: relative;
+  }
+
+  .img-box::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .img-box:hover::before{
+    opacity: 1;
   }
 
   .img-cover{
-    @apply w-full h-full object-cover
+    @apply w-full h-full object-cover;
+    transition: transform 0.3s ease;
+  }
+
+  .img-box:hover .img-cover{
+    transform: scale(1.05);
   }
 
   .section{
     @apply pt-20 lg:pt-32
   }
+
+  /* Fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Slide-in from left */
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Slide-in from right */
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Scale up animation */
+  @keyframes scaleUp {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+  }
+
+  .slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+  }
+
+  .scale-up {
+    animation: scaleUp 0.6s ease-out forwards;
+  }
+
+  /* Stagger animation delays */
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-400 { animation-delay: 0.4s; }
+  .delay-500 { animation-delay: 0.5s; }
+
+  /* Floating shapes animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+      transform: translate(30px, -30px) rotate(120deg);
+    }
+    66% {
+      transform: translate(-20px, 20px) rotate(240deg);
+    }
+  }
+
+  /* Glow pulse animation */
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(56, 189, 248, 0.6), 0 0 60px rgba(56, 189, 248, 0.4);
+    }
+  }
+
+  .animate-glow {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  /* Shimmer effect */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(56, 189, 248, 0.3) 50%,
+      transparent 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 3s infinite;
+  }
 }
 
 @layer components{
   .menu-btn{
-    @apply w-10 h-10 grid place-items-center bg-zinc-50/10 rounded-xl ring-inset ring-1 ring-zinc-50/[0.02] backdrop-blur-2xl hover:bg-zinc-50/15 transition-[transform,background-color] active:scale-95
+    @apply w-10 h-10 grid place-items-center bg-zinc-50/10 rounded-xl ring-inset ring-1 ring-zinc-50/[0.02] backdrop-blur-2xl hover:bg-zinc-50/15 transition-[transform,background-color] active:scale-95;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  }
+
+  .menu-btn:hover{
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
   }
 
   .navbar{
-    @apply absolute top-full mt-2 right-0 min-w-40 p-2 bg-zinc-50/10 rounded-2xl ring-inset ring-1 ring-zinc-50/5 scale-90 isolate blur-sm opacity-0 invisible transition-[opacity,transform,filter] md:static md:flex md:items-center md:mt-0 md:opacity-100 md:blur-0 md:visible md:scale-100 backdrop-blur-2xl
+    @apply absolute top-full mt-2 right-0 min-w-40 p-2 bg-zinc-50/10 rounded-2xl ring-inset ring-1 ring-zinc-50/5 scale-90 isolate blur-sm opacity-0 invisible transition-[opacity,transform,filter] md:static md:flex md:items-center md:mt-0 md:opacity-100 md:blur-0 md:visible md:scale-100 backdrop-blur-2xl;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
   }
 
   .navbar.active{
@@ -69,7 +220,24 @@
   }
 
   .nav-link{
-    @apply grid items-center h-9 px-4 text-sm font-medium tracking-wide text-zinc-50/50 hover:text-zinc-50 transition-colors
+    @apply grid items-center h-9 px-4 text-sm font-medium tracking-wide text-zinc-50/50 hover:text-zinc-50 transition-colors;
+    position: relative;
+  }
+
+  .nav-link::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after{
+    width: 80%;
   }
 
   .nav-link.active{
@@ -77,11 +245,23 @@
   }
 
   .navbar .active-box{
-    @apply absolute bg-zinc-50 rounded-lg -z-10 transition-[top,left] duration-500
+    @apply absolute bg-zinc-50 rounded-lg -z-10 transition-[top,left] duration-500;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
   }
 
   .btn{
-    @apply max-w-max h-9 flex items-center gap-2 px-4 rounded-xl font-medium text-sm ring-1 ring-zinc-50/5 ring-inset transition-[background-color]
+    @apply max-w-max h-9 flex items-center gap-2 px-4 rounded-xl font-medium text-sm ring-1 ring-zinc-50/5 ring-inset transition-[background-color];
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn:active{
+    transform: translateY(0);
   }
 
   .btn-secondary{
@@ -89,7 +269,12 @@
   }
 
   .btn .material-symbols-rounded{
-    @apply text-[18px]
+    @apply text-[18px];
+    transition: transform 0.3s ease;
+  }
+
+  .btn:hover .material-symbols-rounded{
+    transform: translateX(2px);
   }
 
   .btn:has( .material-symbols-rounded){
@@ -97,11 +282,21 @@
   }
 
   .btn-primary{
-    @apply h-11 bg-sky-400 text-zinc-950 hover:bg-sky-300 active:bg-sky-400 
+    @apply h-11 bg-sky-400 text-zinc-950 hover:bg-sky-300 active:bg-sky-400;
+    box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+  }
+
+  .btn-primary:hover{
+    box-shadow: 0 8px 20px rgba(56, 189, 248, 0.5);
   }
 
   .btn-outline{
-    @apply h-11 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-800 
+    @apply h-11 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-800;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-outline:hover{
+    border-color: rgba(56, 189, 248, 0.5);
   }
 
   .label{
@@ -110,7 +305,13 @@
 
   .text-field{
     @apply block outline-none w-full px-3 py-3 text-sm bg-zinc-800 rounded-xl ring-1 ring-inset ring-transparent
-    transition-shadow hover:ring-zinc-50/5 focus:ring-sky-400  focus:ring-2
+    transition-shadow hover:ring-zinc-50/5 focus:ring-sky-400  focus:ring-2;
+    transition: all 0.3s ease;
+  }
+
+  .text-field:focus{
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
   }
 
   .text-field::placeholder{

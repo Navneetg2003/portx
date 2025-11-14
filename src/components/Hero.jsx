@@ -16,7 +16,7 @@ const Hero = () => {
               label="Download CV"
               icon="download"
               href="assets\Navneet_CV.pdf"
-              download="Navneet_CV.pdf"
+              target="_blank"
             />
 
             <ButtonOutline

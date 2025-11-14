@@ -2,14 +2,14 @@ import ProjectCard from "./ProjectCard";
 
 const works = [
     {
-      imgSrc: 'https://images.unsplash.com/photo-1558769132-cb1aea8f4e4d?w=800&auto=format&fit=crop',
+      imgSrc: 'assets/vv.png',
       title: 'VastraVerse',
       tags: ['AI', 'Computer Vision', 'Generative AI', 'Python'],
       projectLink: 'https://github.com/Navneetg2003/VastraVerse',
       description: 'AI-powered virtual try-on system using computer vision and generative AI to revolutionize online fashion shopping experience.'
     },
     {
-      imgSrc: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop',
+      imgSrc: 'assets/ss.png',
       title: 'StockSentry',
       tags: ['Python', 'Market Analysis', 'Alerts', 'Data Analysis'],
       projectLink: 'https://github.com/Navneetg2003/StockSentry',
@@ -23,7 +23,7 @@ const works = [
       description: 'Advanced geospatial analysis platform leveraging PostgreSQL and GIS technologies for powerful location-based insights.'
     },
     {
-      imgSrc: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&auto=format&fit=crop',
+      imgSrc: 'https://dsawebsite-kappa.vercel.app/aac2.jpg',
       title: 'All About Coding',
       tags: ['DSA', 'Python', 'Java', 'C++'],
       projectLink: 'https://github.com/Navneetg2003/All-About-Coding',

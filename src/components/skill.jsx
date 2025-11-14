@@ -63,18 +63,8 @@ const skillItem = [
       desc: 'SQL Database'
     },
     {
-      imgSrc: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
-      label: 'Docker',
-      desc: 'Containerization'
-    },
-    {
       imgSrc: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
       label: 'Java',
-      desc: 'Programming'
-    },
-    {
-      imgSrc: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
-      label: 'TypeScript',
       desc: 'Programming'
     },
     {

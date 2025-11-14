@@ -21,13 +21,12 @@ const ProjectCard = ({
         <div className="relative p-5 flex flex-col h-full">
           
           {/* Image */}
-          <figure className="img-box aspect-video rounded-xl mb-4 overflow-hidden relative shadow-lg">
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-zinc-900/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500 z-10"></div>
+          <figure className="aspect-video rounded-xl mb-4 overflow-hidden relative bg-transparent">
               <img 
                   src={imgSrc} 
                   alt={title}
                   loading='lazy'
-                  className="img-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                  className="w-full h-full rounded-xl object-contain group-hover:scale-110 transition-transform duration-700 ease-out"
               />
           </figure>
 

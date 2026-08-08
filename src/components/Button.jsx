@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const ButtonPrimary = ({ href, target = "_self", label, icon, classes }) => {
   if (href) {
     return (
-      <a href={href} target={target} className={"btn btn-primary " + classes}>
+      <a href={href} target={target} rel="noopener noreferrer" className={"btn btn-primary " + classes}>
         {label}
 
         {icon ? (
@@ -39,7 +39,7 @@ ButtonPrimary.propTypes = {
 const ButtonOutline = ({ href, target = "_self", label, icon, classes }) => {
   if (href) {
     return (
-      <a href={href} target={target} className={"btn btn-outline " + classes}>
+      <a href={href} target={target} rel="noopener noreferrer" className={"btn btn-outline " + classes}>
         {label}
 
         {icon ? (

@@ -1,3 +1,6 @@
+import { useState } from "react";
+import Reveal from "./Reveal";
+
 const socialLinks = [
   {
     href: "https://github.com/Navneetg2003",
@@ -34,6 +37,23 @@ const socialLinks = [
       </svg>
     ),
     alt: "LinkedIn",
+  },
+  {
+    href: "https://leetcode.com/u/navneetg1302/",
+    icon: (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"
+          fill="currentColor"
+        />
+      </svg>
+    ),
+    alt: "LeetCode",
   },
   {
     href: "https://x.com/navgupta1302",
@@ -74,15 +94,41 @@ const socialLinks = [
 ];
 
 const Contact = () => {
+  const [status, setStatus] = useState("idle"); // idle | submitting | success | error
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setStatus("submitting");
+
+    const form = event.target;
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <section id="contact" className="section">
       <div className="container lg:grid lg:grid-cols-2 lg:items-stretch lg:gap-12">
         <div className="mb-12 lg:mb-0 lg:flex lg:flex-col fade-in">
           <div className="relative inline-block mb-8">
-            <h2 className="headline-2 lg:max-w-[12ch] reveal-up relative z-10">
+            <Reveal as="h2" className="headline-2 lg:max-w-[12ch] relative z-10">
               Let&apos;s Work Together
-            </h2>
-            <div className="absolute -bottom-2 left-0 w-32 h-1 bg-gradient-to-r from-sky-400 via-blue-500 to-purple-500 rounded-full animate-glow"></div>
+            </Reveal>
+            <div className="absolute -bottom-2 left-0 w-32 h-1 bg-gradient-to-r from-sky-400 to-blue-500 rounded-full"></div>
             <div className="absolute -top-8 -left-8 w-24 h-24 bg-sky-400/10 rounded-full blur-2xl"></div>
           </div>
 
@@ -127,9 +173,10 @@ const Contact = () => {
         <form
           action="https://getform.io/f/anllxzna"
           method="POST"
+          onSubmit={handleSubmit}
           className="xl:pl-10 2xl:pl-20 fade-in delay-200"
         >
-          <div className="relative p-[2px] rounded-2xl bg-gradient-to-br from-sky-400/30 via-blue-500/20 to-purple-500/30 hover:from-sky-400/50 hover:via-blue-500/40 hover:to-purple-500/50 transition-all duration-500">
+          <div className="relative p-[2px] rounded-2xl bg-gradient-to-br from-sky-400/30 to-blue-500/20 hover:from-sky-400/50 hover:to-blue-500/40 transition-all duration-500">
             <div className="relative rounded-2xl bg-gradient-to-br from-zinc-900 to-zinc-800 p-6 md:p-8">
               
               {/* Animated gradient overlay */}
@@ -142,58 +189,86 @@ const Contact = () => {
                   Send me a message
                 </h3>
 
-                <div className="md:grid md:items-center md:grid-cols-2 md:gap-4">
-                  <div className="mb-5">
-                    <label htmlFor="name" className="label text-zinc-300 mb-2 block text-sm font-medium">
-                      Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      autoComplete="name"
-                      required
-                      placeholder="Name"
-                      className="text-field w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-zinc-200 placeholder-zinc-500 focus:border-sky-400/50 focus:ring-2 focus:ring-sky-400/20 focus:outline-none transition-all duration-300"
-                    />
+                {status === "success" ? (
+                  <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-10 text-center">
+                    <span className="material-symbols-rounded text-4xl text-emerald-400">check_circle</span>
+                    <p className="mt-3 text-zinc-200 font-medium">Message sent — I&apos;ll get back to you soon.</p>
+                    <button
+                      type="button"
+                      onClick={() => setStatus("idle")}
+                      className="mt-4 text-sm text-sky-400 hover:text-sky-300 transition-colors"
+                    >
+                      Send another message
+                    </button>
                   </div>
+                ) : (
+                  <>
+                    <div className="md:grid md:items-center md:grid-cols-2 md:gap-4">
+                      <div className="mb-5">
+                        <label htmlFor="name" className="label text-zinc-300 mb-2 block text-sm font-medium">
+                          Name *
+                        </label>
+                        <input
+                          type="text"
+                          name="name"
+                          id="name"
+                          autoComplete="name"
+                          required
+                          disabled={status === "submitting"}
+                          placeholder="Name"
+                          className="text-field w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-zinc-200 placeholder-zinc-500 focus:border-sky-400/50 focus:ring-2 focus:ring-sky-400/20 focus:outline-none transition-all duration-300 disabled:opacity-60"
+                        />
+                      </div>
 
-                  <div className="mb-5">
-                    <label htmlFor="email" className="label text-zinc-300 mb-2 block text-sm font-medium">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      autoComplete="email"
-                      required
-                      placeholder="email@example.com"
-                      className="text-field w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-zinc-200 placeholder-zinc-500 focus:border-sky-400/50 focus:ring-2 focus:ring-sky-400/20 focus:outline-none transition-all duration-300"
-                    />
-                  </div>
-                </div>
+                      <div className="mb-5">
+                        <label htmlFor="email" className="label text-zinc-300 mb-2 block text-sm font-medium">
+                          Email *
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          id="email"
+                          autoComplete="email"
+                          required
+                          disabled={status === "submitting"}
+                          placeholder="email@example.com"
+                          className="text-field w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-zinc-200 placeholder-zinc-500 focus:border-sky-400/50 focus:ring-2 focus:ring-sky-400/20 focus:outline-none transition-all duration-300 disabled:opacity-60"
+                        />
+                      </div>
+                    </div>
 
-                <div className="mb-6">
-                  <label htmlFor="message" className="label text-zinc-300 mb-2 block text-sm font-medium">
-                    Message *
-                  </label>
-                  <textarea
-                    name="message"
-                    id="message"
-                    placeholder="Tell me about your project..."
-                    required
-                    className="text-field resize-y min-h-32 max-h-80 w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-zinc-200 placeholder-zinc-500 focus:border-sky-400/50 focus:ring-2 focus:ring-sky-400/20 focus:outline-none transition-all duration-300"
-                  ></textarea>
-                </div>
+                    <div className="mb-6">
+                      <label htmlFor="message" className="label text-zinc-300 mb-2 block text-sm font-medium">
+                        Message *
+                      </label>
+                      <textarea
+                        name="message"
+                        id="message"
+                        placeholder="Tell me about your project..."
+                        required
+                        disabled={status === "submitting"}
+                        className="text-field resize-y min-h-32 max-h-80 w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-zinc-200 placeholder-zinc-500 focus:border-sky-400/50 focus:ring-2 focus:ring-sky-400/20 focus:outline-none transition-all duration-300 disabled:opacity-60"
+                      ></textarea>
+                    </div>
 
-                <button
-                  type="submit"
-                  className="w-full px-6 py-3.5 rounded-lg bg-gradient-to-r from-sky-400 to-blue-500 text-zinc-950 font-semibold hover:from-sky-500 hover:to-blue-600 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-sky-400/30 flex items-center justify-center gap-2 group"
-                >
-                  <span>Send Message</span>
-                  <span className="material-symbols-rounded text-xl group-hover:translate-x-1 transition-transform duration-300">send</span>
-                </button>
+                    {status === "error" && (
+                      <p className="mb-4 text-sm text-red-400">
+                        Something went wrong sending that. Try again, or email me directly.
+                      </p>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className="w-full px-6 py-3.5 rounded-lg bg-gradient-to-r from-sky-400 to-blue-500 text-zinc-950 font-semibold hover:from-sky-500 hover:to-blue-600 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-sky-400/30 flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    >
+                      <span>{status === "submitting" ? "Sending..." : "Send Message"}</span>
+                      <span className="material-symbols-rounded text-xl group-hover:translate-x-1 transition-transform duration-300">
+                        {status === "submitting" ? "hourglass_top" : "send"}
+                      </span>
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -58,7 +58,7 @@ const Footer = () => {
               <h2 className="headline-1 lg:max-w-[12ch] relative z-10">
                 Thank you for visiting
               </h2>
-              <div className="absolute -bottom-2 left-0 w-32 h-1 bg-gradient-to-r from-sky-400 via-blue-500 to-purple-500 rounded-full animate-glow"></div>
+              <div className="absolute -bottom-2 left-0 w-32 h-1 bg-gradient-to-r from-sky-400 to-blue-500 rounded-full"></div>
             </div>
           </div>
 

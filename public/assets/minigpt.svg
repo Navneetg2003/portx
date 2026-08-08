@@ -1,0 +1,35 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#F5F0E4"/>
+
+  <!-- connections -->
+  <g stroke="#16305C" stroke-width="3" opacity="0.35">
+    <line x1="332" y1="330" x2="512" y2="230"/>
+    <line x1="332" y1="330" x2="512" y2="400"/>
+    <line x1="332" y1="480" x2="512" y2="230"/>
+    <line x1="332" y1="480" x2="512" y2="400"/>
+    <line x1="332" y1="480" x2="512" y2="560"/>
+    <line x1="512" y1="230" x2="692" y2="330"/>
+    <line x1="512" y1="400" x2="692" y2="330"/>
+    <line x1="512" y1="400" x2="692" y2="480"/>
+    <line x1="512" y1="560" x2="692" y2="480"/>
+    <line x1="512" y1="560" x2="692" y2="560"/>
+  </g>
+
+  <!-- nodes -->
+  <g fill="#16305C">
+    <circle cx="332" cy="330" r="16"/>
+    <circle cx="332" cy="480" r="16"/>
+    <circle cx="512" cy="230" r="16"/>
+    <circle cx="512" cy="400" r="16"/>
+    <circle cx="512" cy="560" r="16"/>
+    <circle cx="692" cy="330" r="16"/>
+    <circle cx="692" cy="480" r="16"/>
+    <circle cx="692" cy="560" r="16"/>
+  </g>
+  <g fill="#3D7FE0">
+    <circle cx="512" cy="400" r="20"/>
+  </g>
+
+  <text x="512" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="80" font-weight="700" fill="#16305C">MiniGPT</text>
+  <text x="512" y="800" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="600" fill="#3D7FE0">Transformer, Built From Scratch</text>
+</svg>

@@ -34,15 +34,27 @@ const Header = () => {
             </span>
           </button>
 
-          <Navbar navOpen={navOpen} />
+          <Navbar navOpen={navOpen} closeNav={() => setNavOpen(false)} />
         </div>
 
-        <a
-        href="#contact"
-        className="btn btn-secondary max-md:hidden md:justify-self-end fade-in delay-200"
-        >
-          Contact Me
-        </a>
+        <div className="flex items-center gap-3 justify-self-end">
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-command-palette"))}
+            aria-label="Open command palette"
+            className="hidden md:flex items-center gap-2 px-3 py-2 rounded-full bg-zinc-800/60 border border-zinc-700/50 text-zinc-400 hover:text-zinc-200 hover:border-zinc-600 transition-all duration-300 fade-in"
+          >
+            <span className="material-symbols-rounded text-[18px]" aria-hidden="true">search</span>
+            <kbd className="text-[11px] font-sans">⌘K</kbd>
+          </button>
+
+          <a
+          href="#contact"
+          className="btn btn-secondary max-md:hidden fade-in delay-200"
+          >
+            Contact Me
+          </a>
+        </div>
 
       </div>
     </header>

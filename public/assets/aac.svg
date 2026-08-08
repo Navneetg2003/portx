@@ -1,0 +1,15 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#F5F0E4"/>
+
+  <!-- code brackets -->
+  <text x="345" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="260" font-weight="700" fill="#16305C">&lt;</text>
+  <text x="679" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="260" font-weight="700" fill="#16305C">/&gt;</text>
+
+  <!-- three progress bars for difficulty levels -->
+  <rect x="430" y="330" width="60" height="18" rx="9" fill="#3D9E7F"/>
+  <rect x="430" y="365" width="90" height="18" rx="9" fill="#E0913D"/>
+  <rect x="430" y="400" width="45" height="18" rx="9" fill="#C0453D"/>
+
+  <text x="512" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="58" font-weight="700" fill="#16305C">All About Coding</text>
+  <text x="512" y="800" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="600" fill="#3D9E7F">Live DSA Learning Platform</text>
+</svg>

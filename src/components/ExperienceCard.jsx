@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const ExperienceCard = ({ time, content, name, imgSrc, company, skills, classes }) => {
   return (
     <div
-      className={`relative p-[2px] rounded-2xl bg-gradient-to-br from-sky-400/30 via-blue-500/20 to-purple-500/30 group hover:from-sky-400/50 hover:via-blue-500/40 hover:to-purple-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-sky-400/25 ${classes}`}
+      className={`relative p-[2px] rounded-2xl bg-gradient-to-br from-sky-400/30 to-blue-500/20 group hover:from-sky-400/50 hover:to-blue-500/40 transition-all duration-500 hover:shadow-2xl hover:shadow-sky-400/25 ${classes}`}
     >
       <div className="relative rounded-2xl bg-gradient-to-br from-zinc-900 to-zinc-800 hover:from-zinc-800 hover:to-zinc-700 transition-all duration-500 h-full overflow-hidden">
         
@@ -12,23 +12,21 @@ const ExperienceCard = ({ time, content, name, imgSrc, company, skills, classes 
           <div className="absolute inset-0 bg-gradient-to-br from-sky-400/10 via-transparent to-blue-500/10"></div>
         </div>
 
-        {/* Content wrapper */}
-        <div className="relative p-5 flex flex-col min-w-[320px] lg:min-w-[440px] h-full">
-          
-          {/* Company info header */}
-          <div className="flex items-start gap-3 mb-4">
-            <figure className="img-box rounded-xl overflow-hidden ring-2 ring-zinc-700/50 group-hover:ring-sky-400/50 transition-all duration-500 shrink-0 shadow-lg">
+        {/* Card body: logo badge sits beside the header, content flows below full-width */}
+        <div className="relative h-full min-w-[320px] lg:min-w-[440px] flex flex-col p-6">
+
+          {/* Header: logo badge + company/role/date */}
+          <div className="flex items-center gap-4 mb-4">
+            <figure className="w-16 h-16 sm:w-[72px] sm:h-[72px] shrink-0 rounded-xl bg-white p-2.5 shadow-lg ring-1 ring-black/5 flex items-center justify-center overflow-hidden group-hover:scale-105 group-hover:shadow-sky-400/20 transition-all duration-500">
               <img
                 src={imgSrc}
                 alt={name}
-                width={48}
-                height={48}
                 loading="lazy"
-                className="img-cover group-hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-contain"
               />
             </figure>
 
-            <div className="flex-1">
+            <div className="min-w-0">
               <h3 className="text-lg font-bold mb-0.5 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-sky-400 group-hover:to-blue-500 group-hover:bg-clip-text transition-all duration-300">
                 {company}
               </h3>
@@ -62,7 +60,6 @@ const ExperienceCard = ({ time, content, name, imgSrc, company, skills, classes 
                     key={index} 
                     className="px-2.5 py-1 text-xs text-zinc-400 bg-zinc-800/80 backdrop-blur-sm rounded-full border border-zinc-700/50 group-hover:bg-gradient-to-r group-hover:from-sky-400/20 group-hover:to-blue-500/20 group-hover:text-sky-300 group-hover:border-sky-400/30 transition-all duration-300 hover:scale-105 relative overflow-hidden"
                   >
-                    <span className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100"></span>
                     <span className="relative z-10">{skill}</span>
                   </span>
                 ))}

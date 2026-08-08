@@ -24,15 +24,11 @@
 
 @layer utilities{
   .headline-1{
-    @apply max-w-max;
+    @apply max-w-max text-5xl leading-tight font-semibold lg:text-[55px] lg:leading-[1.15];
     background: -webkit-linear-gradient(0deg, #fafafa, #a1a1aa);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
-  
-  .headline-1{
-    @apply text-5xl leading-tight font-semibold lg:text-[55px] lg:leading-[1.15]
   }
   .headline-2{
     @apply text-3xl lg:text-4xl lg:leading-tight font-semibold
@@ -47,33 +43,6 @@
 
   .container{
     @apply px-4 mx-auto lg:px-8 xl:max-w-6xl;
-  }
-
-  .img-box{
-    @apply bg-zinc-700 overflow-hidden;
-    position: relative;
-  }
-
-  .img-box::before{
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .img-box:hover::before{
-    opacity: 1;
-  }
-
-  .img-cover{
-    @apply w-full h-full object-cover;
-    transition: transform 0.3s ease;
-  }
-
-  .img-box:hover .img-cover{
-    transform: scale(1.05);
   }
 
   .section{
@@ -176,27 +145,6 @@
 
   .animate-glow {
     animation: glow-pulse 2s ease-in-out infinite;
-  }
-
-  /* Shimmer effect */
-  @keyframes shimmer {
-    0% {
-      background-position: -1000px 0;
-    }
-    100% {
-      background-position: 1000px 0;
-    }
-  }
-
-  .shimmer {
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(56, 189, 248, 0.3) 50%,
-      transparent 100%
-    );
-    background-size: 1000px 100%;
-    animation: shimmer 3s infinite;
   }
 }
 
@@ -316,5 +264,19 @@
 
   .text-field::placeholder{
     @apply text-zinc-400
+  }
+}
+
+/* Respect the OS-level "reduce motion" preference: collapse every
+   animation/transition to effectively instant instead of forcing the
+   fade-ins, glow-pulse, and smooth-scroll on everyone. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

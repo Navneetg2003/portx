@@ -1,0 +1,15 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#F5F0E4"/>
+
+  <!-- phone body -->
+  <rect x="392" y="220" width="240" height="420" rx="36" fill="none" stroke="#16305C" stroke-width="14"/>
+  <line x1="392" y1="580" x2="632" y2="580" stroke="#16305C" stroke-width="14"/>
+  <circle cx="512" cy="608" r="10" fill="#16305C"/>
+
+  <!-- medical cross on screen -->
+  <rect x="472" y="330" width="80" height="220" rx="16" fill="#3D9E7F"/>
+  <rect x="417" y="385" width="190" height="80" rx="16" fill="#3D9E7F"/>
+
+  <text x="512" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#16305C">AushdCare</text>
+  <text x="512" y="800" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="600" fill="#3D9E7F">Healthcare, On Android</text>
+</svg>

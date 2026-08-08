@@ -1,0 +1,20 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#F5F0E4"/>
+
+  <!-- two overlapping chat bubbles -->
+  <rect x="292" y="300" width="300" height="200" rx="40" fill="none" stroke="#16305C" stroke-width="14"/>
+  <path d="M 340 500 L 340 570 L 410 500 Z" fill="#16305C"/>
+
+  <rect x="452" y="380" width="280" height="180" rx="36" fill="#E0913D"/>
+  <path d="M 680 560 L 680 622 L 616 560 Z" fill="#E0913D"/>
+
+  <circle cx="380" cy="390" r="10" fill="#F5F0E4"/>
+  <circle cx="440" cy="390" r="10" fill="#F5F0E4"/>
+  <circle cx="500" cy="390" r="10" fill="#F5F0E4"/>
+
+  <line x1="512" y1="450" x2="672" y2="450" stroke="#F5F0E4" stroke-width="10" stroke-linecap="round"/>
+  <line x1="512" y1="490" x2="620" y2="490" stroke="#F5F0E4" stroke-width="10" stroke-linecap="round"/>
+
+  <text x="512" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="80" font-weight="700" fill="#16305C">Yaar</text>
+  <text x="512" y="800" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="600" fill="#E0913D">Full-Stack Web Platform</text>
+</svg>

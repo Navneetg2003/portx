@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 
-const Navbar = ({ navOpen }) => {
+const Navbar = ({ navOpen, closeNav }) => {
   const lastActiveLink = useRef(null);
   const activeBox = useRef(null);
 
@@ -35,6 +35,8 @@ const Navbar = ({ navOpen }) => {
     activeBox.current.style.left = event.target.offsetLeft + 'px';
     activeBox.current.style.width = event.target.offsetWidth + 'px';
     activeBox.current.style.height = event.target.offsetHeight + 'px';
+
+    if (closeNav) closeNav();
   };
 
   const navItems = [
@@ -57,6 +59,11 @@ const Navbar = ({ navOpen }) => {
     {
       label: 'Experience',
       link: '#experiences',
+      className: 'nav-link',
+    },
+    {
+      label: 'Achievements',
+      link: '#achievements',
       className: 'nav-link',
     },
     {
@@ -88,6 +95,7 @@ const Navbar = ({ navOpen }) => {
 
 Navbar.propTypes = {
   navOpen: PropTypes.bool.isRequired,
+  closeNav: PropTypes.func,
 };
 
 export default Navbar;

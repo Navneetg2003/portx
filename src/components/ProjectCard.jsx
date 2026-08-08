@@ -4,12 +4,12 @@ const ProjectCard = ({
     imgSrc,
     title,
     tags,
-    projectLink,
     description,
-    classes 
+    classes,
+    onOpenDetails,
 }) => {
   return (
-    <div className={"relative p-[2px] rounded-2xl bg-gradient-to-br from-sky-400/30 via-blue-500/20 to-purple-500/30 group hover:from-sky-400/50 hover:via-blue-500/40 hover:to-purple-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-sky-400/25 " + classes}>
+    <div className={"relative p-[2px] rounded-2xl bg-zinc-800 group hover:bg-gradient-to-br hover:from-sky-400/50 hover:to-blue-500/40 transition-all duration-500 hover:shadow-2xl hover:shadow-sky-400/20 " + classes}>
       <div className="relative rounded-2xl bg-gradient-to-br from-zinc-900 to-zinc-800 hover:from-zinc-800 hover:to-zinc-700 transition-all duration-500 h-full overflow-hidden">
         
         {/* Animated gradient overlay */}
@@ -20,8 +20,8 @@ const ProjectCard = ({
         {/* Content wrapper */}
         <div className="relative p-5 flex flex-col h-full">
           
-          {/* Image */}
-          <figure className="aspect-video rounded-xl mb-4 overflow-hidden relative bg-transparent">
+          {/* Image — square frame to match the actual assets (most are 1:1); aspect-video was leaving visible dead space on either side of every square image */}
+          <figure className="aspect-square rounded-xl mb-4 overflow-hidden relative bg-zinc-950/40">
               <img 
                   src={imgSrc} 
                   alt={title}
@@ -36,7 +36,7 @@ const ProjectCard = ({
                   {title}
               </h3>
               
-              <div className="w-10 h-10 rounded-lg grid place-items-center bg-gradient-to-br from-sky-400 to-blue-500 text-zinc-950 shrink-0 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-sky-400/30 group-hover:shadow-sky-400/60">
+              <div className="w-10 h-10 rounded-lg grid place-items-center bg-zinc-800 text-zinc-500 shrink-0 group-hover:bg-gradient-to-br group-hover:from-sky-400 group-hover:to-blue-500 group-hover:text-zinc-950 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-sky-400/20 transition-all duration-300">
                   <span className="material-symbols-rounded text-[20px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" aria-hidden="true">
                       arrow_outward
                   </span>
@@ -52,19 +52,18 @@ const ProjectCard = ({
           <div className="flex flex-wrap items-center gap-2 mt-auto">
               {tags.map((label, key) => (
                   <span key={key} className="h-7 text-xs text-zinc-400 bg-zinc-800/80 backdrop-blur-sm grid items-center px-3 rounded-full border border-zinc-700/50 group-hover:bg-gradient-to-r group-hover:from-sky-400/20 group-hover:to-blue-500/20 group-hover:text-sky-300 group-hover:border-sky-400/30 transition-all duration-300 hover:scale-105 relative overflow-hidden">
-                      <span className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100"></span>
                       <span className="relative z-10">{label}</span>
                   </span>
               ))}
           </div>
         </div>
 
-        <a 
-          href={projectLink} 
-          target='_blank' 
-          rel="noopener noreferrer" 
+        <button
+          type="button"
+          onClick={onOpenDetails}
+          aria-label={`View details for ${title}`}
           className="absolute inset-0 rounded-2xl z-20"
-        ></a>
+        ></button>
       </div>
     </div>
   );
@@ -74,9 +73,9 @@ ProjectCard.propTypes = {
     imgSrc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    projectLink: PropTypes.string,
     description: PropTypes.string,
-    classes: PropTypes.string
+    classes: PropTypes.string,
+    onOpenDetails: PropTypes.func,
 };
 
 export default ProjectCard;

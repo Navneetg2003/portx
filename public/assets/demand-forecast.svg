@@ -1,0 +1,21 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#F5F0E4"/>
+
+  <!-- axes -->
+  <line x1="300" y1="250" x2="300" y2="560" stroke="#16305C" stroke-width="6"/>
+  <line x1="300" y1="560" x2="720" y2="560" stroke="#16305C" stroke-width="6"/>
+
+  <!-- actual line -->
+  <polyline points="300,480 370,440 440,460 510,380 580,410 650,320 720,350"
+            fill="none" stroke="#16305C" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- forecast line (dashed, accent) -->
+  <polyline points="580,410 650,300 720,260"
+            fill="none" stroke="#3D9E7F" stroke-width="10" stroke-dasharray="4 22" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- bolt icon -->
+  <path d="M 545 200 L 505 290 L 535 290 L 515 350 L 575 260 L 545 260 Z" fill="#E0913D"/>
+
+  <text x="512" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="66" font-weight="700" fill="#16305C">Demand Forecasting</text>
+  <text x="512" y="800" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="600" fill="#3D9E7F">LSTM Time-Series Model</text>
+</svg>

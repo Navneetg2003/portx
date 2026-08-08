@@ -101,18 +101,32 @@ const Contact = () => {
     setStatus("submitting");
 
     const form = event.target;
+    const formData = new FormData(form);
+    const payload = {
+      name: String(formData.get("name") || "").trim(),
+      email: String(formData.get("email") || "").trim(),
+      message: String(formData.get("message") || "").trim(),
+    };
 
     try {
-      const response = await fetch(form.action, {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
       });
+
+      const result = await response.json().catch(() => null);
 
       if (response.ok) {
         setStatus("success");
         form.reset();
       } else {
+        if (result?.error) {
+          console.error("Contact submit failed:", result.error);
+        }
         setStatus("error");
       }
     } catch {
@@ -147,7 +161,7 @@ const Contact = () => {
             
             <div className="flex items-center gap-3 text-zinc-400">
               <span className="material-symbols-rounded text-2xl">location_on</span>
-              <span className="text-sm">Madhya Pradesh, India</span>
+              <span className="text-sm">Gurgaon, India</span>
             </div>
           </div>
 
@@ -171,7 +185,6 @@ const Contact = () => {
         </div>
 
         <form
-          action="https://getform.io/f/anllxzna"
           method="POST"
           onSubmit={handleSubmit}
           className="xl:pl-10 2xl:pl-20 fade-in delay-200"
@@ -192,7 +205,7 @@ const Contact = () => {
                 {status === "success" ? (
                   <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-10 text-center">
                     <span className="material-symbols-rounded text-4xl text-emerald-400">check_circle</span>
-                    <p className="mt-3 text-zinc-200 font-medium">Message sent — I&apos;ll get back to you soon.</p>
+                    <p className="mt-3 text-zinc-200 font-medium">Message saved — I&apos;ll get back to you soon.</p>
                     <button
                       type="button"
                       onClick={() => setStatus("idle")}
@@ -263,7 +276,7 @@ const Contact = () => {
                       className="w-full px-6 py-3.5 rounded-lg bg-gradient-to-r from-sky-400 to-blue-500 text-zinc-950 font-semibold hover:from-sky-500 hover:to-blue-600 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-sky-400/30 flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
                       <span>{status === "submitting" ? "Sending..." : "Send Message"}</span>
-                      <span className="material-symbols-rounded text-xl group-hover:translate-x-1 transition-transform duration-300">
+                      <span aria-hidden="true" className="material-symbols-rounded text-xl group-hover:translate-x-1 transition-transform duration-300">
                         {status === "submitting" ? "hourglass_top" : "send"}
                       </span>
                     </button>

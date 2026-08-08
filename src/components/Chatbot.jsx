@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const INITIAL_MESSAGE = {
   role: "model",
-  text: "Hi! I'm an AI assistant that can answer questions about Navneet's projects, skills, and experience. What would you like to know?",
+  text: "Hi! I can answer questions about Navneet's education, experience, projects, skills, achievements, and contact details. Ask me anything about his profile or work.",
 };
 
 const Chatbot = () => {
@@ -175,7 +175,7 @@ const Chatbot = () => {
             >
               <span className="material-symbols-rounded text-[14px]">close</span>
             </button>
-            👋 Ask me about Navneet&apos;s projects, skills, or experience!
+            👋 Ask me about Navneet&apos;s education, projects, skills, or experience!
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,53 +1,156 @@
+import { profileContext } from "./profileContext.js";
+
 const GEMINI_MODEL = "gemini-3.5-flash";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+const GROQ_MODEL = "llama-3.1-70b-versatile";
+const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 const MAX_HISTORY_MESSAGES = 20;
 const MAX_MESSAGE_LENGTH = 2000;
 
-const SYSTEM_PROMPT = `You are the AI assistant embedded in Navneet Gupta's personal portfolio website (navneetg.vercel.app). Your job is to answer only questions that are relevant to Navneet Gupta, his background, his projects, his skills, his internships, his achievements, or things that connect directly to his portfolio.
+function isSchoolQuestion(text) {
+  const normalized = text.toLowerCase();
+  return /\b(high\s*school|schooling|class\s*10|10\s*th|10th|class\s*12|12\s*th|12th|school)\b/.test(
+    normalized
+  );
+}
 
-If the user asks a general knowledge question or something unrelated to Navneet, politely refuse to answer it and redirect them back to Navneet's profile, projects, experience, or contact form. Do not act like a general-purpose tutor or chatbot.
+function getSchoolReply() {
+  return "Navneet studied at Delhi Public School, Gwalior. Class 12: CBSE, 90.8%. Class 10: CBSE, 89.6%.";
+}
 
-When the user asks about a concept like DSA, AI, Python, React, or internships, keep the answer tied to Navneet's own experience or projects instead of giving a standalone lesson.
+function getGroqApiKey() {
+  return process.env.GROQ_API_KEY || process.env.groq_api || process.env.groq_api_key;
+}
 
-Answer visitor questions about Navneet accurately, concisely, and in a friendly, professional tone. Use only the facts below. If asked something not covered here, say you don't have that detail and suggest the visitor use the contact form to ask Navneet directly. Never invent facts about him.
+function getConversationText(messages) {
+  return messages
+    .map((message) => String(message?.text || ""))
+    .join(" \n")
+    .toLowerCase();
+}
 
-ABOUT: Navneet Gupta is a final-year B.Tech Computer Science student at VIT, graduating in 2026 (CGPA 8.66). He builds at the intersection of AI/ML, quantitative research, and full-stack engineering.
+function isTopicQuestion(text, keywords) {
+  return keywords.some((keyword) => text.includes(keyword));
+}
 
-EXPERIENCE (most recent first):
-- Algorithmic Trader, Axxela Research & Analytics (Jan-Jun 2026): designed and backtested quantitative trading strategies in Python on SOFR fixed-income futures; evaluated strategies with Sharpe ratio, max drawdown, and Calmar ratio.
-- AI Engineer Intern, GoPrac (Nov 2025-Jan 2026): built an LLM-based feedback automation pipeline with programmatic video rendering via Remotion; applied prompt engineering techniques (few-shot, chain-of-thought, output formatting constraints).
-- Software Engineering Intern, GC Cloud Info System (Dec 2024-Feb 2025): built 15+ REST API endpoints in Java/Spring Boot; cut API latency 35% under 300+ concurrent requests through PostgreSQL query optimization and composite indexing.
+function getLocalFallbackReply(messages) {
+  const conversationText = getConversationText(messages);
 
-KEY PROJECTS:
-- MiniGPT: a GPT-style transformer built entirely from scratch in PyTorch (no HuggingFace), trained on Tiny Shakespeare.
-- StockSentry-AI: a quant analytics pipeline combining FinBERT news sentiment with XGBoost price models, R\u00b2 of 0.91.
-- VastraVerse: a generative AI cultural fashion platform (Gemini API + Stable Diffusion virtual try-on), semi-finalist at the BharatGen Hackathon.
-- GeoVision: a geospatial data platform (Java/Spring Boot + PostGIS), cut query latency 30% via GiST indexing on 50K+ records.
-- Yaar: a full-stack web app (React, Node.js/Express, PostgreSQL).
-- All About Coding: a live, deployed DSA learning platform (React + Tailwind CSS), continuously deployed on Vercel.
-- Electricity Demand Forecasting: an LSTM time-series model benchmarked against Random Forest and Gradient Boosting baselines.
-- AushdCare: a native Android healthcare app (MVVM architecture, Firebase, Retrofit).
-
-SKILLS: Python, PyTorch, TensorFlow, Scikit-learn, Pandas, NumPy, Java, Spring Boot, React, Node.js, Express, PostgreSQL, MongoDB, Docker, Git.
-
-ACHIEVEMENTS: 325+ LeetCode problems solved (contest rating 1433, top 70% globally), two Oracle Generative AI certifications (Professional and Foundations Associate), BharatGen Hackathon semi-finalist, NPTEL Cloud Computing certification from IIT Kharagpur.
-
-CONTACT: Visitors can reach Navneet through the contact form on this site, or find him on GitHub (github.com/Navneetg2003) and LinkedIn (linkedin.com/in/navneetgupta).
-
-Keep replies short — 2 to 4 sentences unless the visitor explicitly asks for more detail.`;
-
-export async function processChatRequest({ apiKey, messages, fetchImpl = fetch }) {
-  if (!apiKey) {
-    return {
-      status: 500,
-      body: {
-        error:
-          "GEMINI_API_KEY is not set on the server. Add it in your environment, then restart or redeploy.",
-      },
-    };
+  if (isSchoolQuestion(conversationText)) {
+    return getSchoolReply();
   }
 
+  if (isTopicQuestion(conversationText, ["project", "projects", "tell about them", "them"])) {
+    return (
+      "Navneet's key projects include GeoVision, a geospatial platform built with Java, Spring Boot, PostgreSQL, and PostGIS; " +
+      "StockSentry-AI, a financial analytics pipeline using Python, XGBoost, and FinBERT; " +
+      "MiniGPT, a GPT-style language model built from scratch in PyTorch; " +
+      "VastraVerse, an AI cultural fashion platform using Gemini and Stable Diffusion; " +
+      "Yaar, a full-stack React and Node.js app; and All About Coding, a live DSA learning platform deployed on Vercel."
+    );
+  }
+
+  if (isTopicQuestion(conversationText, ["skill", "skills", "technical skills", "technologies"])) {
+    return "Navneet's core skills include Python, Java, React, Node.js, Spring Boot, PostgreSQL, MongoDB, PyTorch, TensorFlow, Scikit-learn, XGBoost, Docker, Git, and prompt engineering.";
+  }
+
+  if (isTopicQuestion(conversationText, ["achievement", "achievements", "certification", "certifications", "leetcode"])) {
+    return "His standout achievements include 325+ LeetCode problems solved, a contest rating of 1433, BharatGen Hackathon semi-finalist recognition, and Oracle OCI Generative AI and AI Foundations certifications.";
+  }
+
+  if (isTopicQuestion(conversationText, ["contact", "email", "linkedin", "github"])) {
+    return "You can contact Navneet through the portfolio contact form, email him at navneetg1302@gmail.com, or find him on GitHub and LinkedIn.";
+  }
+
+  if (isTopicQuestion(conversationText, ["education", "college", "vit", "university"])) {
+    return "Navneet is pursuing B.Tech in Computer Science and Engineering at VIT, Vellore, with a CGPA of 8.66 and graduation expected in 2026.";
+  }
+
+  return null;
+}
+
+function buildGeminiContents(messages) {
+  const trimmedHistory = messages.slice(-MAX_HISTORY_MESSAGES);
+
+  return trimmedHistory.map((message) => ({
+    role: message.role === "model" ? "model" : "user",
+    parts: [{ text: String(message.text || "").slice(0, MAX_MESSAGE_LENGTH) }],
+  }));
+}
+
+function buildGroqMessages(messages) {
+  const trimmedHistory = messages.slice(-MAX_HISTORY_MESSAGES);
+
+  return trimmedHistory.map((message) => ({
+    role: message.role === "model" ? "assistant" : "user",
+    content: String(message.text || "").slice(0, MAX_MESSAGE_LENGTH),
+  }));
+}
+
+const SYSTEM_PROMPT = `You are the assistant for Navneet Gupta's personal portfolio website (navneetg.vercel.app).
+
+Goal:
+- Help visitors learn about Navneet's education, experience, projects, skills, achievements, and contact options.
+- Stay strictly within the portfolio context. Do not become a general-purpose tutor, search engine, or math helper.
+
+Behavior rules:
+- Answer only questions that are directly about Navneet Gupta or this portfolio site.
+- If the user asks something unrelated, politely refuse and redirect them to Navneet's projects, experience, education, or contact form.
+- If the user asks about a skill or concept such as AI, Python, React, DSA, databases, or internships, answer only in the context of Navneet's own work.
+- Never invent facts, timelines, or accomplishments.
+- If a detail is not in the profile below, say you do not have that detail and suggest the contact form for more info.
+- Keep answers short, specific, and friendly. Default to 2 to 4 sentences unless the user asks for more detail.
+
+Context file:
+${profileContext}
+
+Instructions:
+- Use the context file above as the full source of truth.
+- If the user asks about school, high school, class 10, class 12, or schooling, answer with these exact facts:
+  - Class 12: Delhi Public School, Gwalior, CBSE, 90.8%.
+  - Class 10: Delhi Public School, Gwalior, CBSE, 89.6%.
+- If the user asks about high school, explicitly mention Delhi Public School, Gwalior.
+- Do not replace these facts with VIT or university details when the question is about school.
+- If the user asks about anything outside the context file, politely say you do not have that detail and direct them to the contact form.
+- Keep answers short, specific, and friendly. Default to 2 to 4 sentences unless the user asks for more detail.`;
+
+async function getGroqReply({ groqApiKey, messages, fetchImpl }) {
+  if (!groqApiKey) {
+    return null;
+  }
+
+  const groqMessages = [
+    { role: "system", content: SYSTEM_PROMPT },
+    ...buildGroqMessages(messages),
+  ];
+
+  const groqRes = await fetchImpl(GROQ_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${groqApiKey}`,
+    },
+    body: JSON.stringify({
+      model: GROQ_MODEL,
+      messages: groqMessages,
+      temperature: 0.7,
+      max_tokens: 400,
+    }),
+  });
+
+  const data = await groqRes.json();
+
+  if (!groqRes.ok) {
+    console.error("Groq API error:", data);
+    return null;
+  }
+
+  const reply = (data?.choices?.[0]?.message?.content || "").trim();
+  return reply || null;
+}
+
+export async function processChatRequest({ apiKey, messages, fetchImpl = fetch }) {
   if (!Array.isArray(messages) || messages.length === 0) {
     return {
       status: 400,
@@ -70,60 +173,97 @@ export async function processChatRequest({ apiKey, messages, fetchImpl = fetch }
     };
   }
 
-  const trimmedHistory = messages.slice(-MAX_HISTORY_MESSAGES);
+  if (isSchoolQuestion(lastMessage.text)) {
+    return {
+      status: 200,
+      body: { reply: getSchoolReply() },
+    };
+  }
 
-  const contents = trimmedHistory.map((message) => ({
-    role: message.role === "model" ? "model" : "user",
-    parts: [{ text: String(message.text || "").slice(0, MAX_MESSAGE_LENGTH) }],
-  }));
+  const localFallbackReply = getLocalFallbackReply(messages);
+  const groqApiKey = getGroqApiKey();
+
+  if (localFallbackReply && !apiKey && !groqApiKey) {
+    return {
+      status: 200,
+      body: { reply: localFallbackReply },
+    };
+  }
 
   try {
-    const geminiRes = await fetchImpl(GEMINI_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-goog-api-key": apiKey,
-      },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-        contents,
-        generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 400,
+    if (apiKey) {
+      const geminiRes = await fetchImpl(GEMINI_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": apiKey,
         },
-      }),
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+          contents: buildGeminiContents(messages),
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 400,
+          },
+        }),
+      });
+
+      const data = await geminiRes.json();
+
+      if (geminiRes.ok) {
+        const reply = (data?.candidates?.[0]?.content?.parts || [])
+          .map((part) => part.text || "")
+          .join("")
+          .trim();
+
+        if (reply) {
+          return { status: 200, body: { reply } };
+        }
+      } else {
+        console.error("Gemini API error:", data);
+      }
+    }
+
+    const groqReply = await getGroqReply({
+      groqApiKey,
+      messages,
+      fetchImpl,
     });
 
-    const data = await geminiRes.json();
-
-    if (!geminiRes.ok) {
-      console.error("Gemini API error:", data);
-      return {
-        status: geminiRes.status,
-        body: {
-          error: data?.error?.message || "Gemini API request failed.",
-        },
-      };
+    if (groqReply) {
+      return { status: 200, body: { reply: groqReply } };
     }
 
-    const reply = (data?.candidates?.[0]?.content?.parts || [])
-      .map((part) => part.text || "")
-      .join("")
-      .trim();
-
-    if (!reply) {
-      return {
-        status: 502,
-        body: { error: "Gemini returned an empty response. Try again." },
-      };
+    if (localFallbackReply) {
+      return { status: 200, body: { reply: localFallbackReply } };
     }
 
-    return { status: 200, body: { reply } };
-  } catch (error) {
-    console.error("Chat handler error:", error);
     return {
       status: 500,
-      body: { error: "Something went wrong talking to Gemini." },
+      body: {
+        error: "Both Gemini and Groq are unavailable right now. Please try again later.",
+      },
+    };
+  } catch (error) {
+    console.error("Chat handler error:", error);
+
+    const groqReply = await getGroqReply({
+      groqApiKey,
+      messages,
+      fetchImpl,
+    }).catch(() => null);
+
+    if (groqReply) {
+      return { status: 200, body: { reply: groqReply } };
+    }
+
+    if (localFallbackReply) {
+      return { status: 200, body: { reply: localFallbackReply } };
+    }
+
+    return {
+      status: 500,
+      body: { error: "Something went wrong talking to Gemini or Groq." },
     };
   }
 }
